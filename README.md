@@ -20,6 +20,9 @@ There are circumstances in which having your SSH on your person may be handy (su
 
 A new bash shell is spawned with its environment set to use the launched ssh-agent instance. When finished and the shell is exited, ssh-agent exits along with it, ensuring your key isn't accidentally left behind on a strange workstation.
 
+## Security ##
+Make sure **any** SSH key you place on a portable USB device is encrypted with a passphrase!
+
 
 ## USB Flash Drives ##
 Flash drives are typically formatted as FAT32 or exFAT for compatability reasons; however there are shortcomings to this format. First, it is proprietary. Secondly, it has a 2GB file size limit. Thirdly, and most pertient to our situation, it does not support POSIX-style permissions.
