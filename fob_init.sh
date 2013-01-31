@@ -14,8 +14,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SSH_AGENT_BIN=`which ssh-agent`
 SSH_ADD_BIN=`which ssh-add`
 SSH_ENV_DIR=$DIR/ssh_keys
-SSH_ENV="$SSH_ENV_DIR/environment"
-SSH_KEYS=`find $SSH_ENV_DIR -type f -name \*.key`
+SSH_KEYS=`grep -rl 'BEGIN .* PRIVATE KEY' ${SSH_ENV_DIR}`
 
 function cleanup {
     [ -z ${SSH_AGENT_PID} ] && exit 0
@@ -34,7 +33,7 @@ function cleanup {
 function preinit_agent {
      export RC_EXECUTE=YES
 
-     [ -z ${SSH_KEYS_LIST} ] && echo "No ssh keys found, exiting." && exit 1
+     [ -z ${SSH_KEYS} ] && echo "No ssh keys found, exiting." && exit 1
      [ -z ${SSH_AGENT_BIN} ] && echo "No ssh-agent command found, exiting." && exit 1
      [ -z ${SSH_ADD_BIN} ] && echo "No ssh-add command found, exiting." && exit 1
 
