@@ -5,7 +5,7 @@
 
 There are circumstances in which having your SSH on your person may be handy (such as on a USB flash drive), but how can you ensure physical and electronic security in doing so?
 
-**ssh-fob** is a simple script that will setup a shell environment instantiated by **ssh-agent**. When initialized, it will load your custom keys located in a _ssh_keys_ directory.
+**ssh-fob** is a simple script that will setup a shell environment instantiated by ssh-agent. When initialized, it will load your custom keys located in a _ssh_keys_ directory.
 
 ## Usage ##
 ### Setup ###
