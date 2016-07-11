@@ -13,8 +13,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # ssh agent setup
 SSH_AGENT_BIN=`which ssh-agent`
 SSH_ADD_BIN=`which ssh-add`
-SSH_ENV_DIR=$DIR/ssh_keys
-SSH_KEYS=`grep -rl 'BEGIN .* PRIVATE KEY' ${SSH_ENV_DIR}`
+SSH_FOB_KEYDIR="ssh_keys"
+SSH_KEYS=`cd "${DIR}"; grep -rl 'BEGIN .* PRIVATE KEY' ${SSH_FOB_KEYDIR}`
 
 function cleanup {
     [ -z ${SSH_AGENT_PID} ] && exit 0
@@ -26,16 +26,16 @@ function cleanup {
     echo "Unloading keys from ssh-agent (${SSH_AGENT_PID})"
     ${SSH_ADD_BIN} -D
     echo
-
-    sleep 3
+    
+    sleep 1
 }
 
 function preinit_agent {
      export RC_EXECUTE=YES
 
-     [ -z ${SSH_KEYS} ] && echo "No ssh keys found, exiting." && exit 1
-     [ -z ${SSH_AGENT_BIN} ] && echo "No ssh-agent command found, exiting." && exit 1
-     [ -z ${SSH_ADD_BIN} ] && echo "No ssh-add command found, exiting." && exit 1
+     [ -z "${SSH_KEYS}" ] && echo "No ssh keys found, exiting." && exit 1
+     [ -z "${SSH_AGENT_BIN}" ] && echo "No ssh-agent command found, exiting." && exit 1
+     [ -z "${SSH_ADD_BIN}" ] && echo "No ssh-add command found, exiting." && exit 1
 
      echo "Initialising new SSH agent..."
      ${SSH_AGENT_BIN} bash --rcfile ${SELF} || exit 1
