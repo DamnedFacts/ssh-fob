@@ -34,4 +34,4 @@ This [blog](http://tanguy.ortolo.eu/blog/article93/usb-udf) post explains it fur
 
 TL;DR: For Mac users, this will suffice for formatting:
 
-    $ sudo newfs_udf -v <volume name> --wipefs yes /dev/disk<num>
+    $ sudo newfs_udf -m blk --wipefs yes -v <volume name> /dev/disk<num>
